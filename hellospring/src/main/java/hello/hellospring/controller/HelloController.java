@@ -29,8 +29,33 @@ public class HelloController {
     @GetMapping("hello-string")
     @ResponseBody // http의 body부분에 이 데이터를 직접 넣어 주겠다는 의미
     public String helloString(@RequestParam("name") String name){
-        return "hello" + name; //viewResolver가 아니고 data가 그대로 전달됨 
+        return "hello" + name; //viewResolver가 아니고 data가 그대로 전달됨
     }
 
+
+    @GetMapping("hello-api")
+    @ResponseBody
+    public Hello helloApi(@RequestParam("name") String name){
+        Hello hello = new Hello(); //Hello객체 생성
+
+        hello.setName(name); //파라미터로 넘어온 name을 이용하여 데이터를 넣음
+        return hello; //객체 반환
+    }
+
+
+    static class Hello { //class내에 class를 정의할 수 있음 HelloController.Hello
+        private String name;
+
+
+        //getter -> getName함수로 데이터를 꺼내 사용
+        public String getName(){
+            return name;
+        }
+
+        //setter -> setName함수로 데이터를 입력
+        public void setName(String name){
+            this.name = name;
+        }
+    }
 
 }
