@@ -2,6 +2,8 @@ package hello.hellospring.repository;
 
 import hello.hellospring.domain.Member;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -10,7 +12,14 @@ import static org.assertj.core.api.Assertions.*;
 
 public class MemoryMemberRepositoryTest {
 
-    MemberRepository repository =  new MemoryMemberRepository();
+    MemoryMemberRepository repository =  new MemoryMemberRepository();
+
+
+    @AfterEach
+    public void afterEach(){
+        repository.clearStore();
+    }
+
 
     @Test
     public void save(){
@@ -68,5 +77,6 @@ public class MemoryMemberRepositoryTest {
         assertThat(result.size()).isEqualTo(2); //모든 것을 찾아내는 메소드의 사이즈가 2이면 성공해야함
 
     }
+
 
 }
