@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 // 순수한 자바코드이기 때문에 스프링 컨테이너가 알 방법이 없음 -> 스프링이 올라올떄 서비스임을 인식하고, 스프링컨테이너의 맴버서비스에 등록해줌.
-@Service
+
 public class MemberService {
 
 
