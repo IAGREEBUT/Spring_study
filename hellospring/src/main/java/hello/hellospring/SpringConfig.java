@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 public class SpringConfig {
 
 
-    private DataSource dataSource;
+    private DataSource dataSource; //jdbc레포에 필요한 매개변수
 
     @Autowired
     public SpringConfig(DataSource dataSource) {
