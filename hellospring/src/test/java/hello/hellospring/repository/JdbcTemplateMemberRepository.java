@@ -49,7 +49,7 @@ public class JdbcTemplateMemberRepository implements MemberRepository {
     @Override
     public Optional<Member> findById(Long id) {
         //(실행할 쿼리문, 결과를 저장할 mapper )
-        List<Member> result = jdbcTemplate.query("select * from member where id = ?",memberRowMapper());
+        List<Member> result = jdbcTemplate.query("select * from member where id = ?",memberRowMapper(),id);
         return result.stream().findAny();
     }
 
