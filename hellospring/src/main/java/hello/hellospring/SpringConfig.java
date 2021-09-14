@@ -21,26 +21,36 @@ public class SpringConfig {
 //    }
 
     //jpa는 entityManager를 사용!
-    private EntityManager em;
+//    private EntityManager em;
+//
+//    @Autowired
+//    public SpringConfig(EntityManager em){
+//        this.em = em;
+//    }
+
+//spring api
+    private final MemberRepository memberRepository;
 
     @Autowired
-    public SpringConfig(EntityManager em){
-        this.em = em;
+    public SpringConfig(MemberRepository memberRepository) { //스프링 컨테이너에서 멤버리포지토리를 찾음(spring jpa가 자동으로 생성한)
+        this.memberRepository = memberRepository;
     }
 
 
     @Bean
     public MemberService memberService() {
-        return new MemberService(memberRepository());
+
+        return new MemberService(memberRepository);//의존성 등록
     }
 
-    @Bean
-    public MemberRepository memberRepository(){
+//    @Bean
+//    public MemberRepository memberRepository(){
 
-        return new JpaMemberRepository(em);
+//        return new JpaMemberRepository(em);
 //        return new JdbcTemplateMemberRepository(dataSource);
 //        return new MemoryMemberRepository();
 //        return new JdbcMemberRepository(dataSource);
-    }
 
 }
+
+
