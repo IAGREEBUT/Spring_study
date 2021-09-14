@@ -8,8 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class Member {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // serial number
     private String name;
 

@@ -13,10 +13,9 @@ public class JpaMemberRepository implements MemberRepository{
     //환경설정에서
     private final EntityManager em;
 
-    public JpaMemberRepository(EntityManager em){
+    public JpaMemberRepository(EntityManager em) {
         this.em = em;
     }
-
 
     @Override
     public Member save(Member member) {
