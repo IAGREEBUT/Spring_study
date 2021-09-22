@@ -2,6 +2,7 @@ package hello.core.order;
 
 import hello.core.discount.DisountPolicy;
 import hello.core.discount.FixDiscountPolicy;
+import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
@@ -10,7 +11,11 @@ public class OrderServiceImpl implements OrderService{
 
 
     private final MemberRepository memberRepository = new MemoryMemberRepository();
-    private final DisountPolicy disountPolicy = new FixDiscountPolicy();
+    private DisountPolicy disountPolicy; //인터페이스 (추상)에만 의존함
+
+//    추상뿐 아니라 구현클래스에도 의존중
+//    private final DisountPolicy disountPolicy = new FixDiscountPolicy();
+//    private final DisountPolicy disountPolicy = new RateDiscountPolicy();
 
 
 
