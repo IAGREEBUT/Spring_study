@@ -2,17 +2,22 @@ package hello.core.member;
 
 
 public class Member {
+
+    //회원에 필요한 attribute
     private Long id;
     private String name;
     private Grade grade;
 
 
+    //생성자
     public Member(Long id, String name, Grade grade){
         this.id = id;
         this.name = name;
         this.grade = grade;
     }
 
+
+    //getter & setter
 
     public Long getId() {
         return id;
