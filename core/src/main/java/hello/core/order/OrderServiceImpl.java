@@ -10,12 +10,18 @@ import hello.core.member.MemoryMemberRepository;
 public class OrderServiceImpl implements OrderService{
 
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
-    private DisountPolicy disountPolicy; //인터페이스 (추상)에만 의존함
+    private final MemberRepository memberRepository;// -> 오직 인터페이스만 존재 (추상화에만 의존함 DIP)
+    private final DisountPolicy disountPolicy; //인터페이스 (추상)에만 의존함 (DIP)
+    // 어떤 구현체가 들어올지 전혀 모르는 상태다
 
 //    추상뿐 아니라 구현클래스에도 의존중
 //    private final DisountPolicy disountPolicy = new FixDiscountPolicy();
 //    private final DisountPolicy disountPolicy = new RateDiscountPolicy();
+
+    public OrderServiceImpl(MemberRepository memberRepository, DisountPolicy disountPolicy){
+        this.disountPolicy =disountPolicy;
+        this.memberRepository=memberRepository;
+    }
 
 
 
