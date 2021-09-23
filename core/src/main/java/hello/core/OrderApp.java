@@ -13,9 +13,14 @@ public class OrderApp {
 
     public static void main(String[] args) {
 
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
+        OrderService orderService = appConfig.orderService();
 
-        MemberService memberService = new MemberServiceImpl();
-        OrderService orderService =  new OrderServiceImpl();
+
+
+//        MemberService memberService = new MemberServiceImpl();
+//        OrderService orderService =  new OrderServiceImpl();
 
 
         //주문을 진행할 회원 부터 생성
