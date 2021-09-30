@@ -21,11 +21,38 @@ public class SingletonTest {
         //2. 조회 : 호출할 때 마다 객체 생성
         MemberService memberService2 = appConfig.memberService(); //memberService 메소드 호출 -> new로 객체생성 후 반환
 
-        //참조값이 다른 것을 확인 ( 객체가 2개 생성됨 ) -> 출력으로 확인하는 것은 테스트에서 안좋은 것 따라서 아래 처럼 변경해야함
+        //참조값이 다른 것을 확인 ( 객체가 2개 생성됨 )
 //        System.out.println("memberService1 = " + memberService1);
 //        System.out.println("memberService2 = " + memberService2);
 
- 
+        //테스트 성공을 위해서는 사실 아래와 같이 하는게 맞음
+        //memberService != meberService2
+        assertThat(memberService1).isNotSameAs(memberService2);
+
+
+    }
+
+    @Test
+    @DisplayName("싱글톤 패턴을 적용한 객체 사용(SingletonService)")
+    void singletonServiceTest(){
+//        private access불가능하기 때문에 new로 호출 불가능 (컴파일 에러)
+//        new SingletonService();
+
+        //1. 조회
+        SingletonService singletonService1 = SingletonService.getInstance();//getInstance로 static변수 호출 -> 새로운 객체가 생성되지 않음
+        //2. 조회
+        SingletonService singletonService2 = SingletonService.getInstance();//getInstance로 static변수 호출 -> 새로운 객체가 생성되지 않음
+
+
+        // 서로 같은 객체가 출력됨
+        System.out.println("singletonService1 = " + singletonService1);
+        System.out.println("singletonService2 = " + singletonService2);
+
+
+        //실제 인스턴스가 같은지 비교해야 하므로 isSameAs
+        assertThat(singletonService1).isSameAs(singletonService2);
+
+
     }
 
 
