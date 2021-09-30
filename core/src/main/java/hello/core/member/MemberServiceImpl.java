@@ -24,6 +24,11 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.findById(memberId); //Repository에서 findById함수를 입력받은 memberId 매개변수를 가지고 실행
     }
 
+    //테스트용도 (29. @Configuration과 싱글톤 단원)
+    public MemberRepository getMemberRepository(){
+        return memberRepository;
+    }
+
 
 
 }
