@@ -1,6 +1,10 @@
 package hello.core.member;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class MemberServiceImpl implements MemberService {
 
     // " 인터페이스 = 구현체 " 형태
@@ -9,6 +13,7 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository; // 구현체를 직접 선택하지 않도록 함 -> 오직 인터페이스만 존재 (추상화에만 의존함 DIP)
 
     //생성자
+    @Autowired //자동 의존관계 주입
     public MemberServiceImpl(MemberRepository memberRepository){ //생성될 때 매개변수로 MemberRepsository구현체를 받아서 생성됨(생성자주입)  -> 구현체를 매개로 넣어주는일은 AppConfig에서
         this.memberRepository = memberRepository;
     }

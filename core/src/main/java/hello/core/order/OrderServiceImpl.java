@@ -3,7 +3,10 @@ package hello.core.order;
 import hello.core.discount.DisountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService{
 
 
@@ -15,6 +18,7 @@ public class OrderServiceImpl implements OrderService{
 //    private final DisountPolicy disountPolicy = new FixDiscountPolicy();
 //    private final DisountPolicy disountPolicy = new RateDiscountPolicy();
 
+    @Autowired// 자동으로 의존관계(MemberRepo , discountpolicy)를 주입해줌
     public OrderServiceImpl(MemberRepository memberRepository, DisountPolicy disountPolicy){
         this.disountPolicy =disountPolicy;
         this.memberRepository=memberRepository;
