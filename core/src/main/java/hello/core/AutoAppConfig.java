@@ -1,6 +1,9 @@
 package hello.core;
 
 
+import hello.core.member.MemberRepository;
+import hello.core.member.MemoryMemberRepository;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
@@ -12,7 +15,12 @@ import org.springframework.context.annotation.FilterType;
 )
 public class AutoAppConfig {
 
-
+    // 34. 중복 등록과 충돌
+    // 수동 빈 등록이 자동 빈 등록과 이름이 같은 경우 테스트를 위해 자동 빈 등록에 있는 이름과 같은 것을 아무거나 빈으로 등록해봄 
+//    @Bean(name = "memoryMemberRepository")
+//    public MemberRepository memberRepository() {
+//        return new MemoryMemberRepository();
+//    }
 
 
 }
