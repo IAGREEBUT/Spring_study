@@ -9,22 +9,36 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderServiceImpl implements OrderService{
 
-
-    private final MemberRepository memberRepository;// -> 오직 인터페이스만 존재 (추상화에만 의존함 DIP)
-    private final DisountPolicy disountPolicy; //인터페이스 (추상)에만 의존함 (DIP)
-    // 어떤 구현체가 들어올지 전혀 모르는 상태다
-
-//    추상뿐 아니라 구현클래스에도 의존중
+//1. 최초 순수 자바 클래스 version -> 문제점 : 추상뿐 아니라 구현 클래스에도 의존
 //    private final DisountPolicy disountPolicy = new FixDiscountPolicy();
 //    private final DisountPolicy disountPolicy = new RateDiscountPolicy();
 
-    @Autowired// 자동으로 의존관계(MemberRepo , discountpolicy)를 주입해줌
-    public OrderServiceImpl(MemberRepository memberRepository, DisountPolicy disountPolicy){
-        this.disountPolicy =disountPolicy;
-        this.memberRepository=memberRepository;
+
+//2. 스프링 컨테이너 사용 (문제점해결 / 의존관계 주입 - 생성자 주입방법)
+//    private final MemberRepository memberRepository;// -> 오직 인터페이스만 존재 (추상화에만 의존함 DIP)
+//    private final DisountPolicy disountPolicy; //인터페이스 (추상)에만 의존함 (DIP)
+//    // 어떤 구현체가 들어올지 전혀 모르는 상태다
+//
+//
+//    @Autowired// 자동으로 의존관계(MemberRepo , discountpolicy)를 주입해줌
+//    public OrderServiceImpl(MemberRepository memberRepository, DisountPolicy disountPolicy){
+//        this.disountPolicy =disountPolicy;
+//        this.memberRepository=memberRepository;
+//    }
+
+//3. 스프링 컨테이너 사용(의존관계 주입 - setter주입)
+    private MemberRepository memberRepository;
+    private DisountPolicy disountPolicy;
+
+    @Autowired
+    public void setMemberRepository(MemberRepository memberRepository){
+        this.memberRepository = memberRepository;
     }
 
-
+    @Autowired
+    public void setDiscountPolicy(DisountPolicy disountPolicy){
+        this.disountPolicy = disountPolicy;
+    }
 
     @Override
     public Order creatOrder(Long memberId, String itemName, int itemPrice) { //1. 주문 생성
