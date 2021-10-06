@@ -1,6 +1,7 @@
 package hello.core.scope;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
 
@@ -27,6 +28,49 @@ public class SingletonWithPrototypeTest1 {
         assertThat(prototypeBean2.getCount()).isEqualTo(1);
 
     }
+
+    @Test
+    void singletonClientUsePrototype(){
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(ClientBean.class, PrototypeBean.class); //매개변수에 있는것 스프링 빈으로 자동등록
+
+
+        ClientBean clientBean1 = ac.getBean(ClientBean.class);
+        int count1 = clientBean1.logic();
+        assertThat(count1).isEqualTo(1); //count 0->1
+
+
+        ClientBean clientBean2 = ac.getBean(ClientBean.class);
+        int count2 = clientBean2.logic();
+        assertThat(count2).isEqualTo(2);//count 1->2
+
+
+    }
+
+
+    @Scope("singleton")
+    static class ClientBean{
+
+        private final PrototypeBean prototypeBean;
+
+        @Autowired
+        public ClientBean(PrototypeBean prototypeBean){ //이때 스프링 컨테이너에 PrototypeBean을 요청-> 그떄 만들어져서 ClientBean(싱글톤)에 할당  (생성시점에 주입)
+            this.prototypeBean = prototypeBean;
+        }
+
+        public int logic(){
+            prototypeBean.addCount();
+            int count = prototypeBean.getCount();
+            return count;
+        }
+
+
+
+
+    }
+
+
+
+
 
     @Scope("prototype")
     static class PrototypeBean{
