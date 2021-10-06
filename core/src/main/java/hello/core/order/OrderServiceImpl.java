@@ -5,6 +5,7 @@ import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,8 +24,8 @@ public class OrderServiceImpl implements OrderService{
 
 
     @Autowired// 자동으로 의존관계(MemberRepo , discountpolicy)를 주입해줌
-    public OrderServiceImpl(MemberRepository memberRepository, DisountPolicy rateDiscountPolicy){
-        this.disountPolicy = rateDiscountPolicy;
+    public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DisountPolicy discountPolicy){
+        this.disountPolicy = discountPolicy;
         this.memberRepository=memberRepository;
     }
 
