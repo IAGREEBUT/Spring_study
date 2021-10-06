@@ -1,6 +1,6 @@
 package hello.core;
 
-import hello.core.discount.DisountPolicy;
+import hello.core.discount.DiscountPolicy;
 import hello.core.discount.FixDiscountPolicy;
 import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.MemberRepository;
@@ -43,7 +43,7 @@ public class AppConfig { //관심사의 분리
     }
 
     @Bean
-    public DisountPolicy disountPolicy(){
+    public DiscountPolicy disountPolicy(){
         return new RateDiscountPolicy();
 //        return new FixDiscountPolicy();
     }

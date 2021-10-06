@@ -1,7 +1,7 @@
 package hello.core.beanfind;
 
 import hello.core.AppConfig;
-import hello.core.discount.DisountPolicy;
+import hello.core.discount.DiscountPolicy;
 import hello.core.discount.FixDiscountPolicy;
 import hello.core.discount.RateDiscountPolicy;
 import org.junit.jupiter.api.DisplayName;
@@ -26,14 +26,14 @@ public class ApplicationContextExtendsFindTest {
     void findBeanByParentTypeDuplicate(){
 //        DisountPolicy bean = ac.getBean(DisountPolicy.class);
 
-        assertThrows(NoUniqueBeanDefinitionException.class, ()-> ac.getBean(DisountPolicy.class));
+        assertThrows(NoUniqueBeanDefinitionException.class, ()-> ac.getBean(DiscountPolicy.class));
     }
 
 
     @Test
     @DisplayName("부모 타입으로 조회시, 자식이 둘 이상 있으면, 빈 이름을 지정하면 된다.")
     void findBeanByParentTypeBeanName(){
-        DisountPolicy rateDiscountPolicy = ac.getBean("rateDiscountPolicy", DisountPolicy.class); //한개만 조회 가능
+        DiscountPolicy rateDiscountPolicy = ac.getBean("rateDiscountPolicy", DiscountPolicy.class); //한개만 조회 가능
         assertThat(rateDiscountPolicy).isInstanceOf(RateDiscountPolicy.class);
     }
 
@@ -48,7 +48,7 @@ public class ApplicationContextExtendsFindTest {
     @Test
     @DisplayName("부모 타입으로 모두 조회하기")
     void findAllBeanParentType(){
-        Map<String, DisountPolicy> beansOfType = ac.getBeansOfType(DisountPolicy.class);
+        Map<String, DiscountPolicy> beansOfType = ac.getBeansOfType(DiscountPolicy.class);
         assertThat(beansOfType.size()).isEqualTo(2);
 
         //확인용도로 출력(실제 테스트에서는 출력문 사용안함)
@@ -73,12 +73,12 @@ public class ApplicationContextExtendsFindTest {
     static class TestConfig{
 
         @Bean
-        public DisountPolicy rateDiscountPolicy(){
+        public DiscountPolicy rateDiscountPolicy(){
             return new RateDiscountPolicy();
         }
 
         @Bean
-        public DisountPolicy fixDiscountPolicy(){
+        public DiscountPolicy fixDiscountPolicy(){
             return new FixDiscountPolicy();
         }
 
