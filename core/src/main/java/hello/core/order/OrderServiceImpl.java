@@ -3,10 +3,12 @@ package hello.core.order;
 import hello.core.discount.DisountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
 
 //1. 최초 순수 자바 클래스 version -> 문제점 : 추상뿐 아니라 구현 클래스에도 의존
@@ -20,11 +22,11 @@ public class OrderServiceImpl implements OrderService{
     // 어떤 구현체가 들어올지 전혀 모르는 상태다
 
 
-    @Autowired// 자동으로 의존관계(MemberRepo , discountpolicy)를 주입해줌
-    public OrderServiceImpl(MemberRepository memberRepository, DisountPolicy disountPolicy){
-        this.disountPolicy =disountPolicy;
-        this.memberRepository=memberRepository;
-    }
+//    @Autowired// 자동으로 의존관계(MemberRepo , discountpolicy)를 주입해줌
+//    public OrderServiceImpl(MemberRepository memberRepository, DisountPolicy disountPolicy){
+//        this.disountPolicy =disountPolicy;
+//        this.memberRepository=memberRepository;
+//    }
 
 //3. 스프링 컨테이너 사용(의존관계 주입 - setter주입)
 //    private MemberRepository memberRepository;
