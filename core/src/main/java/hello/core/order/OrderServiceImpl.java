@@ -23,8 +23,8 @@ public class OrderServiceImpl implements OrderService{
 
 
     @Autowired// 자동으로 의존관계(MemberRepo , discountpolicy)를 주입해줌
-    public OrderServiceImpl(MemberRepository memberRepository, DisountPolicy disountPolicy){
-        this.disountPolicy =disountPolicy;
+    public OrderServiceImpl(MemberRepository memberRepository, DisountPolicy rateDiscountPolicy){
+        this.disountPolicy = rateDiscountPolicy;
         this.memberRepository=memberRepository;
     }
 
