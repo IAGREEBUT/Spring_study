@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-//@MainDiscountPolicy
-@Primary
+@MainDiscountPolicy
+//@Primary
 public class RateDiscountPolicy implements DisountPolicy{
 
 

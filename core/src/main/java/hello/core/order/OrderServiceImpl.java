@@ -1,5 +1,6 @@
 package hello.core.order;
 
+import hello.core.annotation.MainDiscountPolicy;
 import hello.core.discount.DisountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
@@ -24,7 +25,7 @@ public class OrderServiceImpl implements OrderService{
 
 
     @Autowired// 자동으로 의존관계(MemberRepo , discountpolicy)를 주입해줌
-    public OrderServiceImpl(MemberRepository memberRepository, DisountPolicy discountPolicy){
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DisountPolicy discountPolicy){
         this.disountPolicy = discountPolicy;
         this.memberRepository=memberRepository;
     }
