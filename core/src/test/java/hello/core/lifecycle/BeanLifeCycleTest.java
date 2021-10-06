@@ -20,7 +20,7 @@ public class BeanLifeCycleTest {
     @Configuration
     static class LifeCycleConfig{
 
-        @Bean
+        @Bean(initMethod = "init", destroyMethod = "close")
         public NetworkClient networkClient(){
             NetworkClient networkClient = new NetworkClient(); //생성자에서 url을 주입해주지 않음 -> 출력 시 null
             networkClient.setUrl("http://hello-spring.dev");// 나중에 setting해주어야 하는 상황이 많이 발생
