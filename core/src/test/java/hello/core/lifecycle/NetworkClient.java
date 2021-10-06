@@ -3,6 +3,9 @@ package hello.core.lifecycle;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
+import javax.annotation.PostConstruct; //javax 자바에서 공식적으로 지원(스프링 아닌 다른 자바기반 프레임워크에서도 사용가능)
+import javax.annotation.PreDestroy;
+
 public class NetworkClient{
 
 
@@ -33,13 +36,14 @@ public class NetworkClient{
         System.out.println("close: "+url);
     }
 
-
+    @PostConstruct
     public void init() { //property setting(의존관계주입)이 끝나면 호출
         System.out.println("NetworkClient.afterPropertiesSet");
         connect();
         call("초기화 연결 메세지");
     }
 
+    @PreDestroy
     public void close(){ // 빈 종료시 호출
         System.out.println("NetworkClient.destroy");
         disconnect();
