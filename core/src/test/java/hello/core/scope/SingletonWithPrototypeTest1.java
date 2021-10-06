@@ -42,7 +42,7 @@ public class SingletonWithPrototypeTest1 {
 
         ClientBean clientBean2 = ac.getBean(ClientBean.class);
         int count2 = clientBean2.logic();
-        assertThat(count2).isEqualTo(1);//count 1->2
+        assertThat(count2).isEqualTo(2);//count 1->2
 
 
     }
@@ -51,25 +51,22 @@ public class SingletonWithPrototypeTest1 {
     @Scope("singleton")
     static class ClientBean{
 
-//        private final PrototypeBean prototypeBean;
-
-//        @Autowired
-//        public ClientBean(PrototypeBean prototypeBean){ //이때 스프링 컨테이너에 PrototypeBean을 요청-> 그떄 만들어져서 ClientBean(싱글톤)에 할당  (생성시점에 주입)
-//            this.prototypeBean = prototypeBean;
-//        }
+        private final PrototypeBean prototypeBean;
 
         @Autowired
-        ApplicationContext applicationContext;
+        public ClientBean(PrototypeBean prototypeBean){ //이때 스프링 컨테이너에 PrototypeBean을 요청-> 그떄 만들어져서 ClientBean(싱글톤)에 할당  (생성시점에 주입)
+            this.prototypeBean = prototypeBean;
+        }
+
+//        @Autowired
+//        ApplicationContext applicationContext;
 
         public int logic(){
-            PrototypeBean prototypeBean = applicationContext.getBean(PrototypeBean.class); //이 처럼 logic이 실행될 때 마다 항상 요청하면 원하는 대로 만들 수 있다
+//            PrototypeBean prototypeBean = applicationContext.getBean(PrototypeBean.class); //이 처럼 logic이 실행될 때 마다 항상 요청하면 원하는 대로 만들 수 있다
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
         }
-
-
-
 
     }
 
