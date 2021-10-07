@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Provider;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -55,7 +56,7 @@ public class SingletonWithPrototypeTest1 {
 //        private final PrototypeBean prototypeBean;
 
         @Autowired
-        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
+        private Provider<PrototypeBean> prototypeBeanProvider; //
 
 
 //        @Autowired
@@ -68,7 +69,7 @@ public class SingletonWithPrototypeTest1 {
 
         public int logic(){
 //            PrototypeBean prototypeBean = applicationContext.getBean(PrototypeBean.class); //이 처럼 logic이 실행될 때 마다 항상 요청하면 원하는 대로 만들 수 있다
-            PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
+            PrototypeBean prototypeBean = prototypeBeanProvider.get();
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
